@@ -1,0 +1,21 @@
+FROM debian:stable-slim
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    dnsutils \
+    iputils-ping \
+    net-tools \
+    nodejs \
+    openssl \
+    vim-nox \
+    whois \
+&& rm -rf /var/lib/apt/lists/*
+
+COPY server.js .
+EXPOSE 8080
+
+RUN groupadd -r k8s-debug && useradd --no-log-init -r -g k8s-debug k8s-debug
+USER k8s-debug:k8s-debug
+
+CMD nodejs server.js
