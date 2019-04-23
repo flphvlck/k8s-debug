@@ -4,12 +4,15 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
     dnsutils \
+    git \
     iputils-ping \
     net-tools \
     nodejs \
+    openssh-client \
     openssl \
     procps \
     psmisc \
+    rsync \
     vim-nox \
     whois \
 && rm -rf /var/lib/apt/lists/*
