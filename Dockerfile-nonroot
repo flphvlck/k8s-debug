@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     nodejs \
     openssl \
+    procps \
+    psmisc \
     vim-nox \
     whois \
 && rm -rf /var/lib/apt/lists/*
