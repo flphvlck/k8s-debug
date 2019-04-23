@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: k8s-debug
+  name: k8s-debug
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-debug
+  template:
+    metadata:
+      labels:
+        app: k8s-debug
+    spec:
+      containers:
+      - image: filiphavlicek/k8s-debug:root
+        imagePullPolicy: Always
+        name: k8s-debug
