@@ -25,3 +25,17 @@ curl -s -o - https://raw.githubusercontent.com/phidlipus/k8s-debug/master/ingres
 kubectl delete all -l app=k8s-debug
 kubectl delete ingress k8s-debug
 ```
+
+## Example with DaemonSet
+Delete previously deployed Deployment
+````
+kubectl delete deployment k8s-debug
+```
+Deploy damonset
+```
+kubectl apply -f https://raw.githubusercontent.com/phidlipus/k8s-debug/master/daemonset.yaml
+```
+Debug
+```
+for pod in $(kubectl get pods -l app=k8s-debug -o=name); do pod="${pod#pod/}"; echo "$pod"; kubectl exec -it "${pod#pod/}" -- bash -c "env | grep ^NODE_NAME=; echo -n "API_IP="; dig +short kubernetes.default.svc.cluster.local"; echo; done
+```
