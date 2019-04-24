@@ -28,7 +28,7 @@ kubectl delete ingress k8s-debug
 
 ## Example with DaemonSet
 Delete previously deployed Deployment
-````
+```
 kubectl delete deployment k8s-debug
 ```
 Deploy damonset
