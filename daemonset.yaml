@@ -14,7 +14,7 @@ spec:
         app: k8s-debug
     spec:
       containers:
-      - image: filiphavlicek/k8s-debug:root
+      - image: quay.io/filiphavlicek/k8s-debug:root
         imagePullPolicy: Always
         name: k8s-debug
         env:
