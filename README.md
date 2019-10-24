@@ -43,8 +43,8 @@ kubectl apply -f https://gitlab.com/filip.havlicek/k8s-debug/raw/master/pod.yaml
 
 ## Clean
 ```
-kubectl delete all -l app=k8s-debug
-kubectl delete ingress k8s-debug
+kubectl -n k8s-debug delete all -l app=k8s-debug
+kubectl -n k8s-debug delete ingress k8s-debug
 ```
 Or delete whole namespace
 ```
