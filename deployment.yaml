@@ -1,9 +1,10 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app: k8s-debug
   name: k8s-debug
+  namespace: k8s-debug
 spec:
   replicas: 1
   selector:

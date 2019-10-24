@@ -4,6 +4,7 @@ metadata:
   labels:
     app: k8s-debug
   name: k8s-debug
+  namespace: k8s-debug
 spec:
   ports:
   - name: 80-8080
