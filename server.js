@@ -4,7 +4,7 @@ var handleRequest = function(request, response) {
   console.log('Received request for URL: ' + request.url);
   console.log('Headers: ' + JSON.stringify(request.headers));
   response.writeHead(200);
-  response.write('Hostname: ' + require('os').hostname() + '\n' + 'Timestamp:' + new Date().getTime() + '\n');
+  response.write('Hostname: ' + require('os').hostname() + '\n' + 'Timestamp: ' + new Date().getTime() + '\n');
   response.end();
 };
 var www = http.createServer(handleRequest);
