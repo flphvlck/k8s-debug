@@ -15,20 +15,17 @@ spec:
         app: k8s-debug
     spec:
       containers:
-      - image: quay.io/filiphavlicek/k8s-debug:root
+      - image: quay.io/filiphavlicek/k8s-debug:nonroot
         imagePullPolicy: Always
         name: k8s-debug
         env:
-        - name: NODE_NAME
+        - name: KUBERNETES_NODE_NAME
           valueFrom:
             fieldRef:
               apiVersion: v1
               fieldPath: spec.nodeName
       tolerations:
       - key: CriticalAddonsOnly
-        operator: Exists
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
         operator: Exists
       - effect: NoSchedule
         key: node.kubernetes.io/not-ready
