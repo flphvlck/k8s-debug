@@ -24,6 +24,14 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: spec.nodeName
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       tolerations:
       - key: CriticalAddonsOnly
         operator: Exists
