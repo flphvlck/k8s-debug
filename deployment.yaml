@@ -33,3 +33,15 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - k8s-debug
+              topologyKey: kubernetes.io/hostname
+            weight: 100
