@@ -3,8 +3,8 @@
 TMP_DIR=$(mktemp -d)
 POD_IP_LIST="${TMP_DIR}/pod-ip.list"
 POD_SCRIPT="${TMP_DIR}/pod-k8s-debug.sh"
-NOC="\e[0m"
-BLUE="\e[34;1m"
+NOC="\033[0m"
+BLUE="\033[1;34m"
 
 kubectl get ns k8s-debug &>/dev/null || kubectl create ns k8s-debug
 kubectl -n k8s-debug get svc k8s-debug &>/dev/null || kubectl apply -f https://gitlab.com/filip.havlicek/k8s-debug/raw/master/service.yaml
@@ -16,8 +16,10 @@ fi
 cat<<"EOF">"$POD_SCRIPT"
 #!/usr/bin/env bash
 
-NOC="\e[0m"
-YELLOW="\e[33;1m"
+NOC="\033[0m"
+YELLOW="\033[1;33m"
+GREEN="\033[32m"
+RED="\033[31m"
 
 #env | grep ^KUBERNETES_NODE_NAME= | sed "s/=/: /g"
 echo -e "${YELLOW}RESOLVING TEST${NOC}"
@@ -25,16 +27,22 @@ echo -n "K8S API IP: "
 dig +short kubernetes.default.svc.cluster.local
 echo -n "NIC.CZ IP: "
 dig +short nic.cz
-echo -e "${YELLOW}SERVICE CURL TEST${NOC}"
-curl k8s-debug
+echo -en "${YELLOW}SERVICE CURL TEST${NOC}: "
+if CURLOUT=$(curl -s -S k8s-debug 2>&1); then
+    echo -e "${GREEN}OK${NOC}"
+else
+   echo -e "${RED}FAILED${NOC}"
+   echo "${CURLOUT}"
+fi
 echo -e "${YELLOW}INTER POD CURL TEST${NOC}"
-IPS_COUNT=$(wc -l < /tmp/pod-ip.list)
-LINE=0
 while read -r POD_IP; do
-    ((LINE++))
-    curl "${POD_IP}:8080"
-    if [[ "$LINE" -lt "$IPS_COUNT" ]]; then
-        echo "---"
+    unset CURLOUT
+    echo -en "$POD_IP: "
+    if CURLOUT=$(curl -s -S "${POD_IP}:8080" 2>&1); then
+        echo -e "${GREEN}OK${NOC}"
+    else
+       echo -e "${RED}FAILED${NOC}"
+       echo "${CURLOUT}"
     fi
 done< <(cat /tmp/pod-ip.list)
 EOF
