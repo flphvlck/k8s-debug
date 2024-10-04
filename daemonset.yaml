@@ -28,6 +28,10 @@ spec:
           allowPrivilegeEscalation: false
           capabilities:
             drop: ["ALL"]
+        resources:
+          requests:
+            cpu: 10m
+            memory: 30Mi
       securityContext:
         runAsNonRoot: true
         seccompProfile:
