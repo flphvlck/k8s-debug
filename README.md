@@ -1,7 +1,7 @@
 # k8s-debug
 Docker images primarily purposed for debugging or playing with Kubernetes with simple Node.js service on port 8080 which serves container's hostname.  
 Source git repository: [https://github.com/flphvlck/k8s-debug](https://github.com/flphvlck/k8s-debug)  
-Docker repositories
+Docker repositories:
   * [https://quay.io/filiphavlicek/k8s-debug](https://quay.io/filiphavlicek/k8s-debug)
   * [https://hub.docker.com/r/flphvlck/k8s-debug](https://hub.docker.com/r/flphvlck/k8s-debug)
 
