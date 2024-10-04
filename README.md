@@ -1,6 +1,6 @@
 # k8s-debug
 Docker images primarily purposed for debugging or playing with Kubernetes with simple Node.js service on port 8080 which serves container's hostname.  
-Source git repository: [https://gitlab.com/filip.havlicek/k8s-debug](https://gitlab.com/filip.havlicek/k8s-debug)  
+Source git repository: [https://github.com/flphvlck/k8s-debug](https://github.com/flphvlck/k8s-debug)
 Docker repository: [https://quay.io/filiphavlicek/k8s-debug](https://quay.io/filiphavlicek/k8s-debug)
 
 ## Tags
@@ -16,19 +16,19 @@ kubectl -n k8s-debug create service clusterip k8s-debug --tcp=80:8080
 ```
 From yaml files
 ```
-kubectl apply -f https://gitlab.com/filip.havlicek/k8s-debug/raw/master/namespace.yaml
-kubectl apply -f https://gitlab.com/filip.havlicek/k8s-debug/raw/master/deployment.yaml
-kubectl apply -f https://gitlab.com/filip.havlicek/k8s-debug/raw/master/service.yaml
+kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/deployment.yaml
+kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/service.yaml
 ```
 Ingress resource (don't forget to replace the hostname)
 ```
-curl -s -o - https://gitlab.com/filip.havlicek/k8s-debug/raw/master/ingress.yaml | sed "s/@@HOSTNAME@@/yourhostname.domain.tld/g" | kubectl apply -f -
+curl -s -o - https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/ingress.yaml | sed "s/@@HOSTNAME@@/yourhostname.domain.tld/g" | kubectl apply -f -
 ```
 
 ## Deploy with daemonset
 Deploy daemonset instead of deployment
 ```
-kubectl apply -f https://gitlab.com/filip.havlicek/k8s-debug/raw/master/daemonset.yaml
+kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/daemonset.yaml
 ```
 Debug example
 ```
@@ -38,7 +38,7 @@ for pod in $(kubectl -n k8s-debug get pods -l app=k8s-debug -o=name); do pod="${
 ## Deploy with pod
 Deploy pod instead of deployment
 ```
-kubectl apply -f https://gitlab.com/filip.havlicek/k8s-debug/raw/master/pod.yaml
+kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/pod.yaml
 ``` 
 
 ## Clean
