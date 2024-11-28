@@ -28,4 +28,4 @@ EXPOSE 8080
 RUN groupadd -g 999 -r k8s-debug && useradd --no-log-init -u 999 -r -g k8s-debug k8s-debug
 USER 999:999
 
-CMD nodejs server.js
+CMD ["nodejs", "server.js"]
