@@ -36,6 +36,7 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
+      terminationGracePeriodSeconds: 5
       tolerations:
       - key: CriticalAddonsOnly
         operator: Exists

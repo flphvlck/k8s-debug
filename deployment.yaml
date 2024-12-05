@@ -49,3 +49,4 @@ spec:
                   - k8s-debug
               topologyKey: kubernetes.io/hostname
             weight: 100
+      terminationGracePeriodSeconds: 5
