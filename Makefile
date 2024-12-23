@@ -29,7 +29,7 @@ docker: docker-build docker-push
 
 docker-build:
 	docker build --provenance=false --sbom=false --no-cache --platform=linux/amd64,linux/arm64 -t quay.io/filiphavlicek/k8s-debug:root -t docker.io/flphvlck/k8s-debug:root -f Dockerfile-root .
-	docker build --provenance=false --sbom=false --no-cache --platform=linux/amd64,linux/arm64 -t quay.io/filiphavlicek/k8s-debug:nonroot -t quay.io/filiphavlicek/k8s-debug:latest -t docker.io/flphvlck/k8s-debug:nonroot -f Dockerfile-nonroot .
+	docker build --provenance=false --sbom=false --no-cache --platform=linux/amd64,linux/arm64 -t quay.io/filiphavlicek/k8s-debug:nonroot -t quay.io/filiphavlicek/k8s-debug:latest -t docker.io/flphvlck/k8s-debug:nonroot -t docker.io/flphvlck/k8s-debug:latest -f Dockerfile-nonroot .
 
 docker-push:
 	docker push --all-tags quay.io/filiphavlicek/k8s-debug
