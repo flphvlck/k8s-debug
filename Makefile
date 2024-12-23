@@ -32,7 +32,7 @@ docker-build:
 	docker build --provenance=false --sbom=false --no-cache --platform=linux/amd64,linux/arm64 -t quay.io/filiphavlicek/k8s-debug:nonroot -t quay.io/filiphavlicek/k8s-debug:latest -t docker.io/flphvlck/k8s-debug:nonroot -f Dockerfile-nonroot .
 
 docker-push:
-	docker push quay.io/filiphavlicek/k8s-debug
-	docker push docker.io/flphvlck/k8s-debug
+	docker push --all-tags quay.io/filiphavlicek/k8s-debug
+	docker push --all-tags docker.io/flphvlck/k8s-debug
 
 # vim: set noexpandtab:
