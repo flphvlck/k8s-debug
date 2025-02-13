@@ -52,3 +52,14 @@ jobs:
           tags: |
             quay.io/filiphavlicek/k8s-debug:root
             flphvlck/k8s-debug:root
+
+      - name: Build and push k8s-debug:k9s
+        uses: docker/build-push-action@v6
+        with:
+          file: Dockerfile-k9s
+          platforms: linux/amd64,linux/arm64
+          push: true
+          provenance: false
+          tags: |
+            quay.io/filiphavlicek/k8s-debug:k9s
+            flphvlck/k8s-debug:k9s

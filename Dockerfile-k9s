@@ -1,0 +1,24 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && \
+    apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    dnsutils \
+    git \
+    gnupg \
+    iputils-ping \
+    traceroute \
+    net-tools \
+    openssh-client \
+    openssl \
+    procps \
+    psmisc \
+    rsync \
+    jq \
+    telnet \
+    whois && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
