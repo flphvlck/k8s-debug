@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  k8s-debug:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-07-22T09:07:12.810542+02:00"
+    description: A project primarily intended for debugging and experimenting with
+      Kubernetes.
+    digest: 25959426556fde9f267de90c1d8233223ad86296bac9489e42a33f20028d5cf1
+    name: k8s-debug
+    type: application
+    urls:
+    - https://flphvlck.github.io/k8s-debug/k8s-debug-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-07-22T09:07:12.809608+02:00"
