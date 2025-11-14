@@ -9,6 +9,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && \
     git \
     gnupg \
     iputils-ping \
+    jq \
     net-tools \
     nodejs \
     openssh-client \
@@ -16,7 +17,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && \
     procps \
     psmisc \
     rsync \
-    jq \
+    stress \
     telnet \
     whois && \
     apt-get autoremove -y && \
