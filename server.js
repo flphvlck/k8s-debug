@@ -32,10 +32,15 @@ function log(level, message, metadata = {}) {
  */
 var handleRequest = function(request, response) {
   // Generate unique request ID for tracing individual requests through logs
-  const requestId = Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+  const requestId = Date.now() + '-' + Math.random().toString(36).substring(2, 11);
 
   // Get client IP address (use socket.remoteAddress instead of deprecated connection.remoteAddress)
-  const remoteAddress = request.socket.remoteAddress || 'unknown';
+  let remoteAddress = request.socket.remoteAddress || 'unknown';
+
+  // Extract IPv4 address from IPv6-mapped format (::ffff:x.x.x.x)
+  if (remoteAddress.startsWith('::ffff:')) {
+    remoteAddress = remoteAddress.substring(7); // Remove '::ffff:' prefix
+  }
 
   // Log incoming request with structured metadata for monitoring/debugging
   log('INFO', 'Incoming HTTP request', {
