@@ -62,23 +62,54 @@ var handleRequest = function(request, response) {
 
     // Write response body with server information
     response.write('Hostname: ' + os.hostname() + '\n');
-    response.write('Timestamp: ' + new Date().getTime() + '\n');
+    const now = new Date();
+    response.write('Timestamp: ' + now.getTime() + ' (' + now.toISOString() + ')\n');
     response.write('Request ID: ' + requestId + '\n'); // Include request ID in response
 
-    // Include Kubernetes node name if available (set via downward API)
-    if (typeof process.env.KUBERNETES_NODE_NAME !== 'undefined') {
-      response.write('Kubernetes node name: ' + process.env.KUBERNETES_NODE_NAME + '\n');
+    // Include Kubernetes info if available
+    if (typeof process.env.NODE_NAME !== 'undefined' ||
+        typeof process.env.POD_NAME !== 'undefined' ||
+        typeof process.env.POD_NAMESPACE !== 'undefined' ||
+        typeof process.env.POD_IP !== 'undefined') {
+      response.write('\n');
+      response.write('Pod Information:\n');
+    }
+    if (typeof process.env.NODE_NAME !== 'undefined') {
+      response.write('        Node name: ' + process.env.NODE_NAME + '\n');
+    }
+    if (typeof process.env.POD_NAME !== 'undefined') {
+      response.write('        Pod name: ' + process.env.POD_NAME + '\n');
+    }
+    if (typeof process.env.POD_NAMESPACE !== 'undefined') {
+      response.write('        Pod namespace: ' + process.env.POD_NAMESPACE + '\n');
+    }
+    if (typeof process.env.POD_IP !== 'undefined') {
+      response.write('        Pod IP: ' + process.env.POD_IP + '\n');
     }
 
-    // Include client IP address in response
+    // Parse URL to get path and query
+    const url = require('url');
+    const parsedUrl = url.parse(request.url, true);
+    const protocol = request.socket.encrypted ? 'https' : 'http';
+    const host = request.headers.host || 'unknown';
+    const fullUrl = protocol + '://' + host + request.url;
+
+    // Include request information
     response.write('\n');
-    response.write('Client IP: ' + remoteAddress + '\n');
+    response.write('Request Information:\n');
+    response.write('        Client IP: ' + remoteAddress + '\n');
+    response.write('        Method: ' + request.method + '\n');
+    response.write('        Real path: ' + parsedUrl.pathname + '\n');
+    response.write('        Query: ' + (parsedUrl.search ? parsedUrl.search.substring(1) : '') + '\n');
+    response.write('        Request version: ' + request.httpVersion + '\n');
+    response.write('        Request scheme: ' + protocol + '\n');
+    response.write('        Request URI: ' + fullUrl + '\n');
 
     // Write full request headers to response body
     response.write('\n');
     response.write('Request Headers:\n');
     for (const [headerName, headerValue] of Object.entries(request.headers)) {
-      response.write(headerName + ': ' + headerValue + '\n');
+      response.write('        ' + headerName + ': ' + headerValue + '\n');
     }
 
     // End the HTTP response
@@ -123,7 +154,7 @@ www.on('error', (error) => {
 log('INFO', 'Starting HTTP server', {
   port: 8080,
   nodeVersion: process.version,                               // Node.js version
-  kubernetesNode: process.env.KUBERNETES_NODE_NAME || 'not-set' // K8s node or fallback
+  nodeName: process.env.NODE_NAME || 'not-set' // K8s node or fallback
 });
 
 // Start the server listening on port 8080
