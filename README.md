@@ -50,14 +50,4 @@ for pod in $(kubectl -n k8s-debug get pods -l app=k8s-debug -o=name); do pod="${
 Deploy pod instead of deployment
 ```
 kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/manifests/pod.yaml
-``` 
-
-## Clean
-```
-kubectl -n k8s-debug delete all -l app=k8s-debug
-kubectl -n k8s-debug delete ingress k8s-debug
-```
-Or delete whole namespace
-```
-kubectl delete namespace k8s-debug
 ```
