@@ -7,8 +7,10 @@ Image repositories:
   * [https://hub.docker.com/r/flphvlck/k8s-debug](https://hub.docker.com/r/flphvlck/k8s-debug)
 
 ## Tags
-**quay.io/filiphavlicek/k8s-debug:root** - runs under root  
-**quay.io/filiphavlicek/k8s-debug:nonroot** - runs under regular user k8s-debug
+**quay.io/filiphavlicek/k8s-debug:root** - based on Debian, runs under root
+**quay.io/filiphavlicek/k8s-debug:nonroot** - based on Debian, runs under regular user k8s-debug
+**quay.io/filiphavlicek/k8s-debug:slim** - based on Alpine image, no debug tools
+**quay.io/filiphavlicek/k8s-debug:slim** - based on Ubuntu, without Node.js service, using it in k9s plugins
 
 ## Deploy with Helm
 ```
