@@ -1,0 +1,12 @@
+FROM alpine:3
+
+RUN apk update && \
+    apk add --no-cache nodejs && \
+    rm -rf /var/cache/apk/*
+
+COPY server.js .
+EXPOSE 8080
+
+USER 65534:65534
+
+CMD ["node", "server.js"]

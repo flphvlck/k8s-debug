@@ -2,7 +2,7 @@
 A project primarily intended for debugging and experimenting with Kubernetes. The k8s-debug container runs a Node.js service on port 8080 that returns pod details (when running in Kubernetes) along with other useful information.
 
 Source git repository: [https://github.com/flphvlck/k8s-debug](https://github.com/flphvlck/k8s-debug)  
-Docker repositories:
+Image repositories:
   * [https://quay.io/filiphavlicek/k8s-debug](https://quay.io/filiphavlicek/k8s-debug)
   * [https://hub.docker.com/r/flphvlck/k8s-debug](https://hub.docker.com/r/flphvlck/k8s-debug)
 
