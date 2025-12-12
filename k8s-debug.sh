@@ -7,9 +7,9 @@ NOC="\033[0m"
 BLUE="\033[1;34m"
 
 kubectl get ns k8s-debug &>/dev/null || kubectl create ns k8s-debug
-kubectl -n k8s-debug get svc k8s-debug &>/dev/null || kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/service.yaml
+kubectl -n k8s-debug get svc k8s-debug &>/dev/null || kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/manifests/service.yaml
 if ! kubectl -n k8s-debug get daemonset k8s-debug &>/dev/null; then
-    kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/daemonset.yaml
+    kubectl apply -f https://raw.githubusercontent.com/flphvlck/k8s-debug/refs/heads/main/manifests/daemonset.yaml
     kubectl -n k8s-debug rollout status daemonset k8s-debug -w
 fi
 
