@@ -122,7 +122,42 @@ volumeMounts: []
 nodeSelector: {}
 
 tolerations: []
+# - key: "CriticalAddonsOnly"
+#   operator: "Equal"
+#   value: "true"
+#   effect: "NoExecute"
 
 affinity: {}
+  # nodeAffinity:
+  #   preferredDuringSchedulingIgnoredDuringExecution:
+  #   - weight: 100
+  #     preference:
+  #       matchExpressions:
+  #       - key: node.kubernetes.io/scope
+  #         operator: In
+  #         values:
+  #         - system
+  # podAntiAffinity:
+  #   preferredDuringSchedulingIgnoredDuringExecution:
+  #   - weight: 100
+  #     podAffinityTerm:
+  #       labelSelector:
+  #         matchExpressions:
+  #         - key: app.kubernetes.io/name
+  #           operator: In
+  #           values:
+  #             - k8s-debug
+  #       topologyKey: kubernetes.io/hostname
+  #       matchLabelKeys:
+  #       - pod-template-hash
 
-topologySpreadConstraints: {}
+topologySpreadConstraints: []
+# - maxSkew: 1
+#   whenUnsatisfiable: DoNotSchedule
+#   topologyKey: topology.kubernetes.io/zone
+#   minDomains: 3
+#   labelSelector:
+#     matchLabels:
+#       app.kubernetes.io/name: k8s-debug
+#   matchLabelKeys:
+#     - pod-template-hash
