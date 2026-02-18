@@ -2,8 +2,19 @@ apiVersion: v1
 entries:
   k8s-debug:
   - apiVersion: v2
+    appVersion: 0.1.7
+    created: "2026-02-18T10:59:58.691853+01:00"
+    description: A project primarily intended for debugging and experimenting with
+      Kubernetes.
+    digest: 4783447414b73a471ce59b799bd8ffbc10c91db85cc06d5cade773ee66f7b2bb
+    name: k8s-debug
+    type: application
+    urls:
+    - https://flphvlck.github.io/k8s-debug/k8s-debug-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
     appVersion: 0.1.6
-    created: "2025-12-15T09:59:24.200724+01:00"
+    created: "2026-02-18T10:59:58.69157+01:00"
     description: A project primarily intended for debugging and experimenting with
       Kubernetes.
     digest: dfc4788a90dc8e34f11a3d88eba7db5fbb44b04153520c1d3da85f43aae9c19d
@@ -14,7 +25,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.1.5
-    created: "2025-12-15T09:59:24.200449+01:00"
+    created: "2026-02-18T10:59:58.691289+01:00"
     description: A project primarily intended for debugging and experimenting with
       Kubernetes.
     digest: 8ba4e852af586f483a8334d72bb3b5c18f6a4dfa24c747e4303f30586f960d82
@@ -25,7 +36,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.1.4
-    created: "2025-12-15T09:59:24.200195+01:00"
+    created: "2026-02-18T10:59:58.691013+01:00"
     description: A project primarily intended for debugging and experimenting with
       Kubernetes.
     digest: 4991f860b27146ebf81131455007c70759ff4cf02171210775e231f5c3953e3c
@@ -36,7 +47,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.1.3
-    created: "2025-12-15T09:59:24.199942+01:00"
+    created: "2026-02-18T10:59:58.690743+01:00"
     description: A project primarily intended for debugging and experimenting with
       Kubernetes.
     digest: 3666ef06227c18c47425f2d852775b6b01741b539d5a1a979e5b9f5bc275b8a3
@@ -47,7 +58,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2025-12-15T09:59:24.199686+01:00"
+    created: "2026-02-18T10:59:58.690465+01:00"
     description: A project primarily intended for debugging and experimenting with
       Kubernetes.
     digest: 81736e9fe32df4fc2cf01a3c3d5da84745e4e8b41ef769b3d079a19fec4bc2eb
@@ -58,7 +69,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.1.1
-    created: "2025-12-15T09:59:24.19942+01:00"
+    created: "2026-02-18T10:59:58.690166+01:00"
     description: A project primarily intended for debugging and experimenting with
       Kubernetes.
     digest: dffd4324c5e8fe03777995e2d70a729ea7b8005b5c982af1ed077be4b4703ff1
@@ -69,7 +80,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2025-12-15T09:59:24.199151+01:00"
+    created: "2026-02-18T10:59:58.689846+01:00"
     description: A project primarily intended for debugging and experimenting with
       Kubernetes.
     digest: 25959426556fde9f267de90c1d8233223ad86296bac9489e42a33f20028d5cf1
@@ -78,4 +89,4 @@ entries:
     urls:
     - https://flphvlck.github.io/k8s-debug/k8s-debug-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-15T09:59:24.198769+01:00"
+generated: "2026-02-18T10:59:58.689415+01:00"
