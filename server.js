@@ -98,7 +98,7 @@ var handleRequest = function(request, response) {
   const sendResponse = () => {
   try {
     // Set HTTP 200 OK status code
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
+    response.writeHead(200, { 'Content-Type': 'text/plain', 'X-Dummy': 'k8s-debug' });
 
     // Write response body with server information
     response.write('Hostname: ' + os.hostname() + '\n');
