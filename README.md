@@ -6,6 +6,14 @@ Image repositories:
   * [https://quay.io/filiphavlicek/k8s-debug](https://quay.io/filiphavlicek/k8s-debug)
   * [https://hub.docker.com/r/flphvlck/k8s-debug](https://hub.docker.com/r/flphvlck/k8s-debug)
 
+## HTTP server (server.js)
+The container runs a simple Node.js HTTP server on port 8080. On each request it returns hostname, timestamp, pod information (when running in Kubernetes), and request details (headers, method, path).
+
+The server accepts an `X-Delay` header with an integer value in seconds to simulate response delays:
+```
+curl -H "X-Delay: 5" http://<service-address>:8080/
+```
+
 ## Tags
 **quay.io/filiphavlicek/k8s-debug:root** - based on Debian, runs under root
 **quay.io/filiphavlicek/k8s-debug:nonroot** - based on Debian, runs under regular user k8s-debug

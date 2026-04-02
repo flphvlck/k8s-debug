@@ -56,6 +56,16 @@ var handleRequest = function(request, response) {
   // Track request processing time for performance monitoring
   const startTime = Date.now();
 
+  // Parse X-Delay header for simulating response delays (value in seconds)
+  const delayHeader = request.headers['x-delay'];
+  const delaySeconds = delayHeader ? parseInt(delayHeader, 10) : 0;
+  const delayMs = (!isNaN(delaySeconds) && delaySeconds > 0) ? delaySeconds * 1000 : 0;
+
+  if (delayMs > 0) {
+    log('INFO', 'Delaying response', { requestId, delaySeconds });
+  }
+
+  const sendResponse = () => {
   try {
     // Set HTTP 200 OK status code
     response.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -136,6 +146,13 @@ var handleRequest = function(request, response) {
       response.writeHead(500);
       response.end('Internal Server Error');
     }
+  }
+  };
+
+  if (delayMs > 0) {
+    setTimeout(sendResponse, delayMs);
+  } else {
+    sendResponse();
   }
 };
 
