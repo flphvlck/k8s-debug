@@ -31,6 +31,14 @@ function log(level, message, metadata = {}) {
  * @param {object} response - HTTP response object
  */
 var handleRequest = function(request, response) {
+  // Skip logging and full response for Kubernetes probe requests
+  const userAgent = request.headers['user-agent'] || '';
+  if (userAgent.startsWith('kube-probe/')) {
+    response.writeHead(200);
+    response.end('ok');
+    return;
+  }
+
   // Generate unique request ID for tracing individual requests through logs
   const requestId = Date.now() + '-' + Math.random().toString(36).substring(2, 11);
 
