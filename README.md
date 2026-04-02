@@ -9,9 +9,23 @@ Image repositories:
 ## HTTP server (server.js)
 The container runs a simple Node.js HTTP server on port 8080. On each request it returns hostname, timestamp, pod information (when running in Kubernetes), and request details (headers, method, path).
 
-The server accepts an `X-Delay` header with an integer value in seconds to simulate response delays:
+Features:
+- **X-Delay** - accepts `X-Delay` header (value in seconds) to simulate response delays
+- **POST/PUT** - accepts and discards request body, returns the amount of data received (useful for testing proxy upload limits)
+- **Kubernetes probe detection** - requests with `kube-probe/*` User-Agent get a fast `200 ok` with no logging (also useful for quick health checks)
+
 ```
+# Simulate 5 second response delay
 curl -H "X-Delay: 5" http://<service-address>:8080/
+
+# POST data - response includes "Data received: X.XX MiB (Y bytes)"
+curl -X POST --data-binary @largefile.bin http://<service-address>:8080/
+
+# Generate and send 100 MiB of data
+dd if=/dev/zero bs=1M count=100 | curl -X POST -H "Content-Type: application/octet-stream" --data-binary @- http://<service-address>:8080/
+
+# Quick 200 ok without logging (simulates kube-probe)
+curl -A "kube-probe/1.31" http://<service-address>:8080/
 ```
 
 ## Tags

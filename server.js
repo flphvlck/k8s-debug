@@ -25,6 +25,13 @@ function log(level, message, metadata = {}) {
   console.log(JSON.stringify(logEntry));
 }
 
+function formatBytes(bytes) {
+  if (bytes === 0) return '0 B';
+  const units = ['B', 'KiB', 'MiB', 'GiB', 'TiB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+  return (bytes / Math.pow(1024, i)).toFixed(2) + ' ' + units[i];
+}
+
 /**
  * HTTP request handler function that processes all incoming requests
  * @param {object} request - HTTP request object
@@ -72,6 +79,8 @@ var handleRequest = function(request, response) {
   if (delayMs > 0) {
     log('INFO', 'Delaying response', { requestId, delaySeconds });
   }
+
+  let bytesReceived = 0;
 
   const sendResponse = () => {
   try {
@@ -122,6 +131,9 @@ var handleRequest = function(request, response) {
     response.write('        Request version: ' + request.httpVersion + '\n');
     response.write('        Request scheme: ' + protocol + '\n');
     response.write('        Request URI: ' + fullUrl + '\n');
+    if (bytesReceived > 0) {
+      response.write('        Data received: ' + formatBytes(bytesReceived) + ' (' + bytesReceived + ' bytes)\n');
+    }
 
     // Write full request headers to response body
     response.write('\n');
@@ -157,10 +169,23 @@ var handleRequest = function(request, response) {
   }
   };
 
-  if (delayMs > 0) {
-    setTimeout(sendResponse, delayMs);
+  const triggerResponse = () => {
+    if (delayMs > 0) {
+      setTimeout(sendResponse, delayMs);
+    } else {
+      sendResponse();
+    }
+  };
+
+  // For POST/PUT, consume the body and count bytes before responding
+  if (request.method === 'POST' || request.method === 'PUT') {
+    request.on('data', (chunk) => { bytesReceived += chunk.length; });
+    request.on('end', () => {
+      log('INFO', 'Data received', { requestId, method: request.method, bytesReceived });
+      triggerResponse();
+    });
   } else {
-    sendResponse();
+    triggerResponse();
   }
 };
 
