@@ -25,6 +25,19 @@ function log(level, message, metadata = {}) {
   console.log(JSON.stringify(logEntry));
 }
 
+function formatDuration(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  const milliseconds = ms % 1000;
+
+  if (minutes > 0) {
+    return minutes + 'm ' + seconds + 's';
+  } else {
+    return seconds + '.' + String(milliseconds).padStart(3, '0') + 's';
+  }
+}
+
 function formatBytes(bytes) {
   if (bytes === 0) return '0 B';
   const units = ['B', 'KiB', 'MiB', 'GiB', 'TiB'];
@@ -134,6 +147,8 @@ var handleRequest = function(request, response) {
     if (bytesReceived > 0) {
       response.write('        Data received: ' + formatBytes(bytesReceived) + ' (' + bytesReceived + ' bytes)\n');
     }
+    const duration = Date.now() - startTime;
+    response.write('        Processing time: ' + formatDuration(duration) + '\n');
 
     // Write full request headers to response body
     response.write('\n');
@@ -146,10 +161,9 @@ var handleRequest = function(request, response) {
     response.end();
 
     // Log request completion with performance metrics
-    const duration = Date.now() - startTime;
     log('INFO', 'Request completed', {
       requestId,
-      duration,      // Processing time in milliseconds
+      duration,
       statusCode: 200
     });
 
